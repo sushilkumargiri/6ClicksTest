@@ -1,0 +1,29 @@
+﻿----------------------------------------------------------------------------------------------------------------
+SELECT Name,Class,Marks FROM (
+	SELECT
+		name,
+		class,
+		Marks,
+		RANK () OVER ( 
+			PARTITION BY class
+			ORDER BY marks DESC
+		) marks_rank 
+	FROM
+		Students
+) Res
+WHERE marks_rank = 1;
+----------------------------------------------------------------------------------------------------------------
+
+select *
+from
+(
+	select st.Name Student,sub.Name Subject,SM.Marks 
+	from Students AS st
+	JOIN StudentMarks AS sm on sm.StudentId = st.Id
+	JOIN Subjects AS sub on sub.id = sm.SubjectId
+) d
+pivot
+(
+  max(Marks)
+  for Subject in ([English],[Maths])
+) piv;

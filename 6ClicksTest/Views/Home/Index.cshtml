@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="container">
+        <h1 class="display-4">Receipt</h1>
+
+        @foreach (var recItem in @ViewBag.Receipt)
+        {
+            <div style="border-bottom:solid 1px gray;" class="row"><div class="col">@recItem.Key</div></div>
+        }
+    </div>
